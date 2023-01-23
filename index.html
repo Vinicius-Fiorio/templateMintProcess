@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <span>Bored Ape Celta Club</span>
+            </div>
+            <button id="connectWallet" class="buttonConnect">Conectar</button>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="textTitle" style="display: none;">
+                <p>SEUS NFT's</p>
+            </div>
+            <div class="button-min">
+                <button id="mintBAYC">Mint</button>
+            </div>
+                
+            <div class="cards">
+            </div>
+        </div>
+        <div class="options" style="display: none;">
+            <button onclick="loadNFTs()" class="buttonConnect buttonLoad">Recarregar</button>
+        </div>
+    </main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.0/web3.min.js"></script>
+<script src="./contractABI.js"></script>
+
+<script>
+    let walletAddress = ""
+    let metadatasNFTs = []
+    let contract = null
+    let cardsElements = document.querySelector(".cards")
+    const contractAddress = "0x7B95A3d1b73061702F6313e5754205395BD2D44d";
+    
+
+    const getWeb3 = async() => {
+        return new Promise(async (resolve, reject) => {
+            const web3 = new Web3(window.ethereum)
+
+            try {
+                await window.ethereum.request({method: "eth_requestAccounts"})
+                resolve(web3)
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
+
+    document.querySelector("#mintBAYC").addEventListener('click', async () => {
+        const web3 = await getWeb3();
+        const nftContract = new web3.eth.Contract(contractABI, contractAddress);
+
+        nftContract.methods.mintApe(1).send({from: walletAddress})
+    })
+
+
+    async function connect(){
+
+        //  Create Web3 instance
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+        
+        walletAddress = accounts[0];
+        document.querySelector(".buttonConnect").innerHTML = walletAddress.substring(0,5) + '...' + walletAddress.substring(walletAddress.length - 4)
+
+        //  Get Chain Id and switch newtork
+        const chainId = await web3.eth.getChainId();
+
+        if (chainId !== 5) {
+            try {
+                await web3.currentProvider.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: Web3.utils.toHex(5) }],
+                });
+            } catch (switchError) {
+                // This error code indicates that the chain has not been added to MetaMask.
+                if (switchError.code === 4902) {
+                    await web3.currentProvider.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: Web3.utils.toHex(5) }],
+                    })
+                }
+            }
+        }
+
+        // contract = new web3.eth.Contract(contractABI, "0x567754eAebFDE1875D255A7ADe4Bbca68d2b7c7e");
+        // document.querySelector(".textTitle").style.display = "block";
+        // document.querySelector(".options").style.display = "flex";
+        // loadNFTs()
+    }
+
+    async function disconnect(){
+        document.querySelector(".buttonConnect").innerHTML = "Verificar"
+        document.querySelector(".textTitle").style.display = "none";
+        document.querySelector(".options").style.display = "none";
+        cardsElements.innerHTML = ""
+
+        // Close provider session
+
+        console.log("Desconectou")
+    }
+
+    
+
+    async function loadNFTs(){
+        metadatasNFTs = []
+        contract.defaultAccount = walletAddress
+        balanceMooseGang = await contract.methods.balanceOf(walletAddress).call()
+        cardsElements.innerHTML = ""
+
+        if (balanceMooseGang > 0){
+            for (let index = 0; index < balanceMooseGang; index++) {
+                let tokenId = await contract.methods.tokenOfOwnerByIndex(walletAddress, index).call();
+                let tokenURI = await contract.methods.tokenURI(tokenId).call();
+                let metadata = await fetch(tokenURI).then(response => response.json())
+                cardsElements.innerHTML += `
+                <div class="card">
+                    <img src="${metadata.image}" alt="Avatar" width="200">
+                    <div class="container">
+                        <h4><b>${metadata.name}</b></h4> 
+                        <p>Teste</p> 
+                    </div>
+                </div>
+                `
+                metadatasNFTs.push(metadata)
+            }
+        }else{
+            cardsElements.innerHTML = "<p>Esse endereço não possui NFT's</p>"
+        }
+
+        console.log("NFTs: ",metadatasNFTs)
+    }
+
+    document.querySelector('#connectWallet').addEventListener('click', () => {
+        if(document.querySelector('#connectWallet').innerHTML != "Verificar"){
+            disconnect();
+        }else{
+            connect();
+        }
+    })
+</script>
+</html>

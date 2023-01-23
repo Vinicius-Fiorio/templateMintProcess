@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+    height: 100vh;
+}
+
+header{
+    border-bottom: solid 2px transparent;
+    border-image: linear-gradient(90deg, rgb(113, 2, 89) 0%, rgba(230,5,119,1) 49%, rgba(255, 85, 0, 0.862) 100%);
+    border-image-slice: 1;
+    background: #323232;
+}
+
+nav{
+    display: flex;
+    height: 100%;
+    background: #1c1c1c;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px 0 35px;
+}
+  
+.logo{
+    display: flex;
+    align-items: center;
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: 1rem;
+    color: #fff;
+}
+  
+  
+.buttonConnect {
+    align-items: center;
+    appearance: none;
+    background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    height: 45px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: 0.5s;
+    width: auto;
+    z-index: 0;
+    background-size: 200% auto;
+}
+  
+.buttonConnect:hover {
+    background-position: right center;
+}  
+
+main{
+    padding-top: 10px;
+    background: #323232;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #323232;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 200px;
+    height: 280px;
+    border-radius: 5px;
+    background: #202020;
+    margin: 10px;
+    color: #F6F9FE;
+}
+  
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+  
+img {
+    border-radius: 5px 5px 0 0;
+}
+  
+.container {
+    padding: 2px 16px;
+}
+
+.textTitle{
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.options{
+    display: flex;
+    justify-content: center;
+}
+
+.options > button{
+    margin: 20px;
+    background: none;
+    outline:  auto;
+    outline-color: #F6F9FE;
+    outline-width: thin;
+    color: #F6F9FE;
+}
+
+.button-min{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+#mintBAYC{
+    height: 70px;
+    width: 200px;
+    background: #FF512F;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+#mintBAYC:hover{
+    cursor: pointer;
+}
+
+.options > button:hover{
+    transition: 0.5s;
+    outline: none;
+    background-color: #fff;
+    color: #1c1c1c;
+}
+
+@media only screen and (max-width: 670px) {
+    body {
+        grid-template-rows: 2fr 9fr;
+    }
+    header{
+        height: 100px;
+    }
+}

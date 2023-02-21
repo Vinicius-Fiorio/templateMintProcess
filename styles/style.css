@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat",'Roboto', sans-serif;
+}
+
+body{
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+    height: 100vh;
+    background: #000000;
+}
+
+nav{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px 0 35px;
+}
+  
+  
+.buttonConnect {
+    align-items: center;
+    appearance: none;
+    background-image: linear-gradient(to right, #bfc500 0%, #9e9502  51%, #bfc500  100%);
+    border-radius: 10px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    height: 45px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: 0.5s;
+    width: auto;
+    z-index: 0;
+    background-size: 200% auto;
+}
+  
+.buttonConnect:hover {
+    background-position: right center;
+    background-image: linear-gradient(#FFFFFF 0%, #dbd9d9  51%, #FFFFFF  100%);
+}  
+
+main{
+    padding-top: 10px;
+}
+  
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px 90px;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.textTitle{
+    color: #fff;
+    font-size: 29px;
+    line-height: 35px;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.mark-text{
+    color: #bfc500;
+}
+
+.description{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    max-width: 700px;
+}
+
+.mint-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mint-section > p{
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#mintBAYC{
+    height: 70px;
+    width: 200px;
+    background: #bfc500;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-top: 20px;
+    transition: .3s;
+}
+
+#mintBAYC:hover{
+    cursor: pointer;
+    background: #FFFFFF;
+}
+
+@media only screen and (max-width: 670px) {
+    body {
+        grid-template-rows: 2fr 9fr;
+    }
+    header{
+        height: 100px;
+    }
+}

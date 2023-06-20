@@ -134,3 +134,15 @@ main{
         height: 100px;
     }
 }
+
+@media (max-width: 547px) {
+
+    .container{
+      margin: 0 auto;
+      padding: 10px 20px;
+    }
+
+    .textTitle{
+      font-size: 35px;
+    }
+}
